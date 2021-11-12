@@ -55,7 +55,7 @@ class GetOrdersTest extends \PHPUnit\Framework\TestCase
         $prop = $this->getPrivateProperty($this->testClass::class, 'ordersH');
         $this->assertEquals(4, count($prop->getValue($this->testClass)));
         $prop = $this->getPrivateProperty($this->testClass::class, 'orders');
-        $this->assertEquals(4, count($prop->getValue($this->testClass)));
+        $this->assertEquals(10, count($prop->getValue($this->testClass)));
     }
 
 

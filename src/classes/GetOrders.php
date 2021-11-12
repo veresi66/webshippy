@@ -7,6 +7,8 @@ use InvalidArgumentException;
 class GetOrders
 {
     private ?object $stock;
+    private ?array $ordersH;
+    private ?array $orders;
 
     public function __construct(string $argv, int $argc)
     {
@@ -16,5 +18,30 @@ class GetOrders
         if (($this->stock = json_decode($argv)) == null) {
             throw new InvalidArgumentException('Invalid json!');
         }
+    }
+
+    public function loadOrdersFromFile(string $filename)
+    {
+        $row = 1;
+        if (($handle = fopen($filename, 'r')) !== false) {
+            while (($data = fgetcsv($handle)) !== false) {
+                if ($row == 1) {
+                    $this->ordersH = $data;
+                } else {
+                    $o = [];
+                    for ($i = 0; $i < count($this->ordersH); $i++) {
+                        $o[$this->ordersH[$i]] = $data[$i];
+                    }
+                    $this->orders[] = $o;
+                }
+                $row++;
+            }
+            fclose($handle);
+        }
+
+        usort($this->orders, function ($a, $b) {
+            $pc = -1 * ($a['priority'] <=> $b['priority']);
+            return $pc == 0 ? $a['created_at'] <=> $b['created_at'] : $pc;
+        }); 
     }
 }
