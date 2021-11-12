@@ -6,8 +6,8 @@ use InvalidArgumentException;
 
 class GetOrders
 {
-    public ?object $stock;
-    
+    private ?object $stock;
+
     public function __construct(string $argv, int $argc)
     {
         if ($argc != 2) {
