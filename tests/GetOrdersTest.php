@@ -77,6 +77,27 @@ class GetOrdersTest extends \PHPUnit\Framework\TestCase
 
     }
 
+    /**
+     * @test
+     */
+    public function torzsKiiratas() : void
+    {
+        $argv = '{"1":2,"2":3,"3":1}';
+        $argc = 2;
+        $this->testClass = new GetOrders($argv, $argc);    
+        $this->testClass->loadOrdersFromFile('./data/orders.csv');
+        
+        $expected  = "1                   2                   high                2021-03-25 14:51:47 \n";
+        $expected .= "2                   1                   medium              2021-03-21 14:00:26 \n";
+        $expected .= "3                   1                   medium              2021-03-22 12:31:54 \n";
+        $expected .= "2                   2                   low                 2021-03-24 11:02:06 \n";
+        $expected .= "1                   1                   low                 2021-03-25 19:08:22 \n";
+        
+        $this->expectOutputString($expected);
+
+        $this->testClass->printItems();    
+    }
+
 
     /**
      * A private/protected property-k tesztelésének biztosítása
