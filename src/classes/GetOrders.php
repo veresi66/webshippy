@@ -60,16 +60,7 @@ class GetOrders
             if ($this->stock->{$item['product_id']} >= $item['quantity']) {
                 foreach ($this->ordersH as $h) {
                     if ($h == 'priority') {
-                        if ($item['priority'] == 1) {
-                            $text = 'low';
-                        } else {
-                            if ($item['priority'] == 2) {
-                                $text = 'medium';
-                            } else {
-                                $text = 'high';
-                            }
-                        }
-                        echo str_pad($text, 20);
+                        echo str_pad($this->getPriority($item['priority']), 20);
                     } else {
                         echo str_pad($item[$h], 20);
                     }
@@ -77,5 +68,13 @@ class GetOrders
                 echo "\n";
             }
         }        
+    }
+
+    private function getPriority(int $priority) : string
+    {
+        if ($priority == 1) {
+            return 'low';
+        } 
+        return ($priority == 2) ? 'medium' : 'high';
     }
 }
