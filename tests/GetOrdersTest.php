@@ -42,6 +42,22 @@ class GetOrdersTest extends \PHPUnit\Framework\TestCase
         $this->assertIsObject($prop->getValue($this->testClass));
     }
 
+    /**
+     * @test
+     */
+    public function sikeresFileBetoltes() : void
+    {
+        $argv = '{"1":2,"2":3,"3":1}';
+        $argc = 2;
+        $this->testClass = new GetOrders($argv, $argc);    
+        $this->testClass->loadOrdersFromFile('./data/orders.csv');
+        
+        $prop = $this->getPrivateProperty($this->testClass::class, 'ordersH');
+        $this->assertEquals(4, count($prop->getValue($this->testClass)));
+        $prop = $this->getPrivateProperty($this->testClass::class, 'orders');
+        $this->assertEquals(4, count($prop->getValue($this->testClass)));
+    }
+
 
     /**
      * A private/protected property-k tesztelésének biztosítása
