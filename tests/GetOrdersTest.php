@@ -73,7 +73,7 @@ class GetOrdersTest extends \PHPUnit\Framework\TestCase
 
         $this->expectOutputString($expected);
 
-        $this->underTest->printHeader();
+        $this->testClass->printHeader();
 
     }
 

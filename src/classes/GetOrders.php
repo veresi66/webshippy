@@ -20,7 +20,7 @@ class GetOrders
         }
     }
 
-    public function loadOrdersFromFile(string $filename)
+    public function loadOrdersFromFile(string $filename) : void
     {
         $row = 1;
         if (($handle = fopen($filename, 'r')) !== false) {
@@ -43,5 +43,17 @@ class GetOrders
             $pc = -1 * ($a['priority'] <=> $b['priority']);
             return $pc == 0 ? $a['created_at'] <=> $b['created_at'] : $pc;
         }); 
+    }
+
+    public function printHeader() : void
+    {
+        foreach ($this->ordersH as $h) {
+            echo str_pad($h, 20);
+        }
+        echo "\n";
+        foreach ($this->ordersH as $h) {
+            echo str_repeat('=', 20);
+        }
+        echo "\n";
     }
 }
