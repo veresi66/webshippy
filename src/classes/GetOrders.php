@@ -1,7 +1,6 @@
 <?php
 namespace App\classes;
 
-use Exception;
 use InvalidArgumentException;
 
 class GetOrders
@@ -69,6 +68,7 @@ class GetOrders
             }
         }        
     }
+
 
     private function getPriority(int $priority) : string
     {
