@@ -58,6 +58,25 @@ class GetOrdersTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(10, count($prop->getValue($this->testClass)));
     }
 
+    /**
+     * @test
+     */
+    public function fejlecKiiratas() : void
+    {
+        $argv = '{"1":2,"2":3,"3":1}';
+        $argc = 2;
+        $this->testClass = new GetOrders($argv, $argc);    
+        $this->testClass->loadOrdersFromFile('./data/orders.csv');
+        
+        $expected  = "product_id          quantity            priority            created_at          \n";
+        $expected .= "================================================================================\n";
+
+        $this->expectOutputString($expected);
+
+        $this->underTest->printHeader();
+
+    }
+
 
     /**
      * A private/protected property-k tesztelésének biztosítása
