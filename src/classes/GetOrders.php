@@ -53,4 +53,29 @@ class GetOrders
 
         echo "\n" , str_repeat('=', 20 * count($this->ordersH)) , "\n";
     }
+
+    public function printItems() : void
+    {
+        foreach ($this->orders as $item) {
+            if ($this->stock->{$item['product_id']} >= $item['quantity']) {
+                foreach ($this->ordersH as $h) {
+                    if ($h == 'priority') {
+                        if ($item['priority'] == 1) {
+                            $text = 'low';
+                        } else {
+                            if ($item['priority'] == 2) {
+                                $text = 'medium';
+                            } else {
+                                $text = 'high';
+                            }
+                        }
+                        echo str_pad($text, 20);
+                    } else {
+                        echo str_pad($item[$h], 20);
+                    }
+                }
+                echo "\n";
+            }
+        }        
+    }
 }
