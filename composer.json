@@ -1,0 +1,13 @@
+{
+    "name": "webshippy/homework",
+    "description": "Webshippy próbafeladata, megadott fájl refraktorálása",
+    "require": {
+        "php": "^7.3|^8.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
