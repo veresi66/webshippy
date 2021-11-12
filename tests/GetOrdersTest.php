@@ -16,4 +16,16 @@ class GetOrdersTest extends \PHPUnit\Framework\TestCase
         $this->expectExceptionMessage('Ambiguous number of parameters!');
         $this->testClass = new GetOrders($argv, $argc);
     }
+
+    /**
+     * @test
+     */
+    public function letrehozasiHibaInvalidJson() : void
+    {
+        $argv = '{1:2,2:3,3:1}';
+        $argc = 2;
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid json!');
+        $this->testClass = new GetOrders($argv, $argc);        
+    }
 }
