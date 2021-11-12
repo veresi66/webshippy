@@ -53,6 +53,13 @@ class GetOrders
         echo "\n" , str_repeat('=', 20 * count($this->ordersH)) , "\n";
     }
 
+    
+    public function printOrders() : void
+    {
+        $this->printHeader();
+        $this->printItems();
+    }
+
     public function printItems() : void
     {
         foreach ($this->orders as $item) {
