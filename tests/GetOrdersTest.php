@@ -38,6 +38,24 @@ class GetOrdersTest extends \PHPUnit\Framework\TestCase
         $argc = 2;
         $this->testClass = new GetOrders($argv, $argc);
 
-        $this->assertIsObject($this->testClass->stock);
+        $prop = $this->getPrivateProperty($this->testClass::class, 'stock');
+        $this->assertIsObject($prop->getValue($this->testClass));
+    }
+
+
+    /**
+     * A private/protected property-k tesztelésének biztosítása
+     * 
+     * @param string $className
+     * @param string $propertyName
+     * @return mixed
+     */
+    private function getPrivateProperty(string $className, string $propertyName) : mixed
+    {
+        $ref = new ReflectionClass($className);
+        $prop = $ref->getProperty($propertyName);
+        $prop->setAccessible(true);
+
+        return $prop;
     }
 }
