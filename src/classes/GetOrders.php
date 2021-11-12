@@ -50,10 +50,7 @@ class GetOrders
         foreach ($this->ordersH as $h) {
             echo str_pad($h, 20);
         }
-        echo "\n";
-        foreach ($this->ordersH as $h) {
-            echo str_repeat('=', 20);
-        }
-        echo "\n";
+
+        echo "\n" , str_repeat('=', 20 * count($this->ordersH)) , "\n";
     }
 }
