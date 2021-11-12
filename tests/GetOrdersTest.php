@@ -28,4 +28,16 @@ class GetOrdersTest extends \PHPUnit\Framework\TestCase
         $this->expectExceptionMessage('Invalid json!');
         $this->testClass = new GetOrders($argv, $argc);        
     }
+
+    /**
+     * @test
+     */
+    public function sikeresJsonKonvertalas() : void
+    {
+        $argv = '{"1":2,"2":3,"3":1}';
+        $argc = 3;
+        $this->testClass = new GetOrders($argv, $argc);
+
+        $this->assertIsObject($this->testClass->stock);
+    }
 }
